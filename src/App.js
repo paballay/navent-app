@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { ApolloProvider } from '@apollo/client/react';
+import client from './graphql/client';
+import AddBroker from './components/AddItems/AddBroker';
+import AddPropertie from './components/AddItems/AddPropertie';
+import ListBrokers from './components/ListItems/ListBrokers';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <div className="container mt-5">
+        <h1>Panel de Brokers de Bienes Raíces</h1>
+        <div className="row">
+          <div className="col">
+          <div className="row">
+            <AddBroker />
+            </div>
+          <div className="row">
+            <AddPropertie />
+            </div>            
+          </div>
+          <div className="col">
+            <ListBrokers />
+          </div>
+        </div>
+      </div>
+    </ApolloProvider>
   );
 }
-
+ 
 export default App;
