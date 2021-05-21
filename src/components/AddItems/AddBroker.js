@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client';
 import { CreateBroker } from '../../graphql/mutations';
-import { Label, Input } from '../../imports/import';
+import FormFields from './_children/FormFields';
+import { defaultBroker, brokerFields } from './helpers';
+import ButtonAdd from './_children/ButtonAdd';
 
 const AddBroker = () => {
-  const [broker, setBroker] = useState({ name: null, address: null });
+  const [broker, setBroker] = useState(defaultBroker);
   const [createBroker] = useMutation(CreateBroker);
+
 
   const handleInputChange = (event) => {
     setBroker({ 
@@ -17,26 +20,21 @@ const AddBroker = () => {
   const sendData = (e) => {
     e.preventDefault();
     createBroker({ variables: { brokerinput: { name: broker.name, address: broker.address } }});
-    setBroker({ name: null, address: null });
+    setBroker(defaultBroker);
     e.target.reset();
   }
 
   return (
     <form className="row g-3" onSubmit={sendData}>
-      <div className="col-md-6">
-        <Label className="form-label">Nombre</Label>
-        <Input className="form-control" type="text" name="name" onChange={handleInputChange}/>
-      </div>
-      <div className="col-md-6">
-        <Label className="form-label">Direccion</Label>
-        <Input className="form-control" type="text" name="address" onChange={handleInputChange}/>
-      </div>
-      <div className="col-12">
-        <button type="submit" className="btn btn-primary">Agregar</button>
-      </div>
+      {
+        brokerFields.map((e, i) => (
+          <FormFields dataFields={brokerFields[i]} inputChange={handleInputChange} key={i} />
+        ))
+      }
+      <ButtonAdd />
     </form>
   )
-}
+};
 
 export default AddBroker;
     
