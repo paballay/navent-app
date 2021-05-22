@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client';
 import { CreateProperty } from '../../graphql/mutations';
-import { Brokers } from '../../graphql/queries';
+import { Brokers, Properties } from '../../graphql/queries';
 import { Label } from '../../imports/import';
 import { defaultProperty, propertieFields } from './helpers';
 import FormFields from './_children/FormFields';
@@ -31,7 +31,8 @@ const AddPropertie = () => {
           price: parseInt(property.price, 10),
           currency: property.currency
         } 
-      } 
+      },
+      refetchQueries: [{ query: Properties }]
     });
     setProperty(defaultProperty);
     e.target.reset();

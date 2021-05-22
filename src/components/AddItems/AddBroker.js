@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client';
 import { CreateBroker } from '../../graphql/mutations';
+import { Brokers } from '../../graphql/queries';
 import FormFields from './_children/FormFields';
 import { defaultBroker, brokerFields } from './helpers';
 import ButtonAdd from './_children/ButtonAdd';
@@ -19,7 +20,7 @@ const AddBroker = () => {
   
   const sendData = (e) => {
     e.preventDefault();
-    createBroker({ variables: { brokerinput: { name: broker.name, address: broker.address } }});
+    createBroker({ variables: { brokerinput: { name: broker.name, address: broker.address } }, refetchQueries: [{ query: Brokers }]});
     setBroker(defaultBroker);
     e.target.reset();
   }
