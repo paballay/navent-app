@@ -29,6 +29,3 @@ _No olvidar ejecutar la api_
 * [Apollo Client](https://www.apollographql.com/docs/react/) - Graphql Client
 * [Jopi.js](https://www.npmjs.com/package/@oneloop/jopijs/) - Component Librarie
 
-### Notas
-
-_Lamentablemente aun no se pudo implemetar el update del cache por ciertas complicaciones con la misma_
